@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+echo "Running Spotless check..."
+./gradlew spotlessCheck --daemon
+
+echo "All checks passed."
