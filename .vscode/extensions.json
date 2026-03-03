@@ -1,0 +1,8 @@
+{
+        "recommendations": [
+      "vscjava.vscode-java-pack",
+      "redhat.java",
+      "vmware.vscode-spring-boot",
+      "adpyke.vscode-sql-formatter"
+    ]
+}

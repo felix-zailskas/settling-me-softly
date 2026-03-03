@@ -1,0 +1,8 @@
+README.md
+pom.xml
+src/main/java/io/github/felixzailskas/settlingmesoftly/api/AccountsApi.java
+src/main/java/io/github/felixzailskas/settlingmesoftly/api/ApiUtil.java
+src/main/java/io/github/felixzailskas/settlingmesoftly/api/HealthApi.java
+src/main/java/io/github/felixzailskas/settlingmesoftly/model/AccountResponse.java
+src/main/java/io/github/felixzailskas/settlingmesoftly/model/CreateAccountRequest.java
+src/main/java/io/github/felixzailskas/settlingmesoftly/model/HealthResponse.java
