@@ -5,7 +5,7 @@
 |-------------|------------------------------|
 | Ticket      | SMS-001                      |
 | Epic        | Phase 1 — Core Ledger        |
-| Status      | TO DO                        |
+| Status      | DONE                         |
 | Tags        | database, flyway, schema     |
 | Priority    | High                         |
 | Depends On  | —                            |
@@ -22,7 +22,7 @@ All schema changes must be applied as Flyway versioned migrations. No `ddl-auto`
 ### Migrations to create
 
 **V2 — Add currency to account**
-Add a `currency` column (`VARCHAR(10)`, default `USD`, not null) to the existing `account` table.
+Add a `currency` column (`VARCHAR(10)`, default `EUR`, not null) to the existing `account` table.
 
 **V3 — Create transaction table**
 ```
@@ -48,8 +48,8 @@ created_at     TIMESTAMP NOT NULL DEFAULT NOW()
 
 ## Definition of Done
 
-- [ ] `V2__add_currency_to_account.sql` created and applies cleanly
-- [ ] `V3__create_transaction_table.sql` created and applies cleanly
-- [ ] `V4__create_ledger_entry_table.sql` created and applies cleanly
-- [ ] All three migrations run successfully on a fresh database via `make up`
-- [ ] Flyway schema history shows all migrations as applied
+- [x] `V2__add_currency_to_account.sql` created and applies cleanly
+- [x] `V3__create_transaction_table.sql` created and applies cleanly
+- [x] `V4__create_ledger_entry_table.sql` created and applies cleanly
+- [x] All three migrations run successfully on a fresh database via `make up`
+- [x] Flyway schema history shows all migrations as applied

@@ -5,15 +5,7 @@
 ## Ticket
 
 <!-- Link to the ticket e.g. SMS-001 -->
-[SMS-XXX].(docs/work-items/{epic}/SMS-XXX.md)
-
-## Definition of Done
-
-- [ ] Code follows project conventions (no Lombok, no wildcard imports, Google Java Format)
-- [ ] Tests written and passing (`make test`)
-- [ ] No business logic in controllers
-- [ ] Migration files follow `V{n}__description.sql` naming
-- [ ] OpenAPI spec updated if endpoints changed (`make generate` run)
+[SMS-XXX].(https://github.com/felix-zailskas/settling-me-softly/blob/main/docs/work-items/{epic}/SMS-XXX.md)
 
 ## Notes for reviewer
 

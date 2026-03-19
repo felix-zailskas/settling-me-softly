@@ -36,8 +36,15 @@ out/
 ### VS Code ###
 .vscode/
 
+### Env ###
 .env
 .env.*
 !.env.example
 
-.claude/
+### Claude ###
+.claude/*
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/code-review/
+.claude/skills/code-review/*
+!.claude/skills/code-review/SKILL.md

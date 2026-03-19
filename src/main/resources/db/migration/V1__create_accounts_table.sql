@@ -1,6 +1,6 @@
 CREATE
     TABLE
-        account(
+        accounts(
             id BIGSERIAL PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             TYPE VARCHAR(255) NOT NULL,
