@@ -48,8 +48,8 @@ created_at     TIMESTAMP NOT NULL DEFAULT NOW()
 
 ## Definition of Done
 
-- [ ] `V2__add_currency_to_account.sql` created and applies cleanly
-- [ ] `V3__create_transaction_table.sql` created and applies cleanly
-- [ ] `V4__create_ledger_entry_table.sql` created and applies cleanly
-- [ ] All three migrations run successfully on a fresh database via `make up`
-- [ ] Flyway schema history shows all migrations as applied
+- [x] `V2__add_currency_to_account.sql` created and applies cleanly
+- [x] `V3__create_transaction_table.sql` created and applies cleanly
+- [x] `V4__create_ledger_entry_table.sql` created and applies cleanly
+- [x] All three migrations run successfully on a fresh database via `make up`
+- [x] Flyway schema history shows all migrations as applied

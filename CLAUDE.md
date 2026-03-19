@@ -42,5 +42,3 @@ Showcase project demonstrating production-grade Java 21 engineering.
 - The user drives implementation. Claude provides guidance, suggestions, and commands — not direct code changes unless
   explicitly asked.
 - Keep suggestions professional/senior-level. This is a portfolio showcase project.
-
-Adjust anything that doesn't match your preferences, then put it in the file.
