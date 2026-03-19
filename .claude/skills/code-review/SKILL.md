@@ -1,43 +1,60 @@
 ---
 name: code-review
-description: Use when you want the user asks you to review a pull request or some code.
+description: Use when asked to review a pull request — fetches PR diff and ticket context, evaluates code quality across six dimensions, and posts inline review comments to GitHub.
 ---
 
-# General Task
+# Code Review
 
-When this skill is invoked it means that the user wants you to start a code review on an open pull request. You will act as a senior software engineer, reviewing the code changes and then providing valuable and actionable feedback on the code.
+Act as a senior software engineer conducting a thorough, actionable PR review.
 
 ## 1. Gather Information
 
-In order to sucessfully complete this task you first must ask the user what should be reviewed. Ask the user to either provide you with a link to an open pull request.
-
-Additionally this pull request might be related to a spefific ticket. Ask the user to provide you with the link to the completed ticket, if appropriate.
+If a PR URL and ticket path were passed as arguments, use them directly. Otherwise ask the user for:
+- A link to the open pull request
+- Optionally, the path or link to the related ticket
 
 ## 2. Gather Context
 
-Once you have completed step 1, you need to gather context on both the requirements and the implementation. 
+1. Read the ticket fully — understand the intent and Definition of Done
+2. Fetch the PR diff (`gh pr view <N> --repo ... && gh pr diff <N> --repo ...`) — understand what was changed and why
 
-First: Read the provided ticket or task context the user provided you with fully and understand the intent of the task at hand.
+## 3. Review
 
-Second: Read all changes that were made in the linked pull request. Understand what the pull request wanted to achieve and how the code changes helped getting there.
+Evaluate across these dimensions:
 
-## 3. Create a Review
+| Topic             | What to check                                                                 |
+|-------------------|-------------------------------------------------------------------------------|
+| Security          | Exposed secrets, credentials, or PII                                          |
+| Bugs              | Unexpected behaviour, broken existing logic                                   |
+| Test coverage     | New code covered by automated tests                                           |
+| Clean code        | Unnecessary verbosity, deep nesting, convoluted logic                         |
+| Style consistency | Matches existing conventions in the codebase                                  |
+| Code duplication  | Avoidable duplication introduced                                              |
 
-Once step 2 is completed you should have a full idea of what the PR was meant to implement, how it was trying to achieve this and what the actual code changes are. You must then start the review.
+Only create inline PR comments for **medium-to-high impact** findings. Skip nitpicks — mention them in the summary instead.
 
-Focus on the following topics:
+## 4. Post to GitHub
 
-| Topic             | Description                                                                                                                            |
-|-------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| Security          | do the code changes expose any sensitive data, such as keys, credentials, or PII data.                                                 |
-| Bugs              | do the code changes introduce any unexpected behaviour, or affect previous logic such that the methods now produce a different outcome |
-| Test coverage     | are the new code changes covered by automated tests                                                                                    |
-| Clean code        | are the code changes unnecessarily verbose, convoluted or nested                                                                       |
-| Style consistency | do style conventions match existing code patterns in the code base                                                                     |
-| Code duplication  | do the changes introduce avoidable code duplication                                                                                    |
+Use `gh api` to submit a review. Always prefix with `GH_TOKEN=$CLAUDE_GH_TOKEN` to post as the configured GitHub App identity:
 
-If you find any concerns with any of these topics, create a concise, clear and actionable comment for the exact section of the code. Then create a pull request review comment directly on the pull request.
+```sh
+GH_TOKEN=$CLAUDE_GH_TOKEN gh api repos/{owner}/{repo}/pulls/{n}/reviews \
+  --method POST \
+  --field event="COMMENT" \
+  ...
+```
 
-If you decide to create a pull request comment the impact of the requested change should be medium to high. For nitpicky change requests no individual comments should be created.
+If `CLAUDE_GH_TOKEN` is not set, fall back to default `gh` credentials and inform the user comments will appear under their personal account.
 
-After creating each direct review comment, create one brief summarization on the whole PR, indicating if you believe the feature was implemented correctly and completely.
+**Note:** Use `event="COMMENT"` — `REQUEST_CHANGES` is not allowed on your own PRs.
+
+## 5. Summary
+
+After posting inline comments, post one overall summary comment stating whether the feature was implemented correctly and completely, and listing any nitpicks not worth individual comments.
+
+## Common Mistakes
+
+- Using `REQUEST_CHANGES` on a PR you own → GitHub rejects it with 422; use `COMMENT`
+- Commenting on deleted lines without specifying `side="LEFT"` → wrong position
+- Forgetting `GH_TOKEN=$CLAUDE_GH_TOKEN` → comments post as personal account
+- Asking for PR/ticket when they were already passed as arguments
