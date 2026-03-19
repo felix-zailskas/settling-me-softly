@@ -22,7 +22,7 @@ All schema changes must be applied as Flyway versioned migrations. No `ddl-auto`
 ### Migrations to create
 
 **V2 — Add currency to account**
-Add a `currency` column (`VARCHAR(10)`, default `is there `, not null) to the existing `account` table.
+Add a `currency` column (`VARCHAR(10)`, default `EUR`, not null) to the existing `account` table.
 
 **V3 — Create transaction table**
 ```
