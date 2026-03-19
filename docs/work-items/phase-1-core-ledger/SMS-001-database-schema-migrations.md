@@ -5,7 +5,7 @@
 |-------------|------------------------------|
 | Ticket      | SMS-001                      |
 | Epic        | Phase 1 — Core Ledger        |
-| Status      | TO DO                        |
+| Status      | DONE                         |
 | Tags        | database, flyway, schema     |
 | Priority    | High                         |
 | Depends On  | —                            |
